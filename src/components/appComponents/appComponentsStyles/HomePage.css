@@ -1,0 +1,63 @@
+.container {
+  padding: 20px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.widget {
+  margin: 10px;
+  background-color: white;
+  width: calc(33.33% - 20px); /* 3 widgets in a row with margin */
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.wallet-card h1 {
+  margin-bottom: 10px;
+}
+
+.wallet-card button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.widget button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.wallet-card button:hover {
+  background-color: #0056b3;
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog-content button {
+  margin-top: 20px;
+}
