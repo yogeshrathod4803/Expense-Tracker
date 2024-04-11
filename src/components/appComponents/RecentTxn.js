@@ -1,15 +1,41 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./appComponentsStyles/RecentTxn.css";
 import TopExpenseStat from "./TopExpenseStat";
+import { ExpenseContext } from "../../store/ExpenseContext";
 
-const RecentTxn = ({ expenses, categoryTotals, setCategoryTotals }) => {
-  console.log("expenses", expenses);
-  // const data = [
-  //   { category: "Category A", value: 25 },
-  //   { category: "Category B", value: 40 },
-  //   { category: "Category C", value: 30 },
-  //   { category: "Category D", value: 45 },
-  // ];
+const RecentTxn = () => {
+  const { setExpenses, expenses, categoryTotals, setCategoryTotals } =
+    useContext(ExpenseContext);
+
+  const calculateCategoryTotal = () => {
+    const categoryMap = new Map();
+
+    expenses.forEach((expense) => {
+      const { expenseCategory, expenseAmount } = expense;
+      if (categoryMap.has(expenseCategory)) {
+        categoryMap.set(
+          expenseCategory,
+          categoryMap.get(expenseCategory) + parseFloat(expenseAmount)
+        );
+      } else {
+        categoryMap.set(expenseCategory, parseFloat(expenseAmount));
+      }
+    });
+
+    const categoryData = [];
+    categoryMap.forEach((amount, category) => {
+      categoryData.push({ category, amount });
+    });
+
+    return categoryData;
+  };
+
+  const deleteList = (index) => {
+    const updatedExpenses = expenses.filter((_, i) => i !== index);
+    setExpenses(updatedExpenses);
+    const updatedCategoryTotals = calculateCategoryTotal(updatedExpenses);
+    setCategoryTotals(updatedCategoryTotals);
+  };
 
   return (
     <div className="Rcontainer">
@@ -25,7 +51,11 @@ const RecentTxn = ({ expenses, categoryTotals, setCategoryTotals }) => {
                 </div>
                 <div className="RCpricebutton">
                   <span>${expense.expenseAmount}</span>
-                  <button className="delete-button">
+
+                  <button
+                    className="delete-button"
+                    onClick={() => deleteList(index)}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -67,7 +97,6 @@ const RecentTxn = ({ expenses, categoryTotals, setCategoryTotals }) => {
       <div className="Rcontent">
         <h2>Top Expenses</h2>
         <TopExpenseStat
-          expenses={expenses}
           categoryTotals={categoryTotals}
           setCategoryTotals={setCategoryTotals}
         />

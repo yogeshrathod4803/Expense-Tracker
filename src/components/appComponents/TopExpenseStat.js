@@ -40,9 +40,7 @@ export default function TopExpenseStat() {
 
   useEffect(() => {
     setCategoryTotals(calculateCategoryTotal());
-  }, [expenses]);
-
-  console.log("categoryTotals", categoryTotals);
+  }, [expenses, setCategoryTotals]);
 
   return (
     <div className="container">

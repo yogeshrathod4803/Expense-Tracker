@@ -52,6 +52,8 @@ export const ExpenseProvider = ({ children }) => {
         setAddAmtPopupOpen,
         categoryTotals,
         setCategoryTotals,
+
+        setExpenses,
       }}
     >
       {children}
